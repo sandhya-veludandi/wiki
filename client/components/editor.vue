@@ -3,6 +3,23 @@
     nav-header(dense)
       template(slot='mid')
         v-text-field.editor-title-input(
+          v-model='currentPageTitle'
+          placeholder='Title'
+          class="mr-5"
+          background-color='#1e1e1e'
+          style="width: 40%;"
+          dark
+          solo
+          flat
+          hide-details
+          dense
+        )
+        v-text-field.editor-description-input(
+          v-model='currentPageDescription'
+          placeholder='Short Description'
+          class="mr-10"
+          background-color='#1e1e1e'
+          style="width: 50%;"
           dark
           solo
           flat
@@ -181,6 +198,7 @@ export default {
     mode: get('editor/mode'),
     welcomeMode() { return this.mode === `create` && this.path === `home` },
     currentPageTitle: sync('page/title'),
+    currentPageDescription: sync('page/description'),
     checkoutDateActive: sync('editor/checkoutDateActive'),
     currentStyling: get('page/scriptCss'),
     isDirty () {
@@ -588,9 +606,6 @@ export default {
       background-color: mc('grey', '900');
     }
 
-    &-title-input input {
-      text-align: center;
-    }
   }
 
   .atom-spinner.is-inline {
