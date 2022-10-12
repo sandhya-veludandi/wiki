@@ -148,6 +148,7 @@ module.exports = class Page extends Model {
       isPublished: 'boolean',
       publishEndDate: 'string',
       publishStartDate: 'string',
+      contentType: 'string',
       render: 'string',
       tags: [
         {
@@ -797,7 +798,7 @@ module.exports = class Page extends Model {
    * @returns {Promise} Promise with no value
    */
   static async deletePage(opts) {
-    const page = await WIKI.models.pages.getPageFromDb(_.has(opts, 'id') ? opts.id : opts);
+    const page = await WIKI.models.pages.getPageFromDb(_.has(opts, 'id') ? opts.id : opts)
     if (!page) {
       throw new WIKI.Error.PageNotFound()
     }
@@ -1077,6 +1078,7 @@ module.exports = class Page extends Model {
       isPublished: page.isPublished === 1 || page.isPublished === true,
       publishEndDate: page.publishEndDate,
       publishStartDate: page.publishStartDate,
+      contentType: page.contentType,
       render: page.render,
       tags: page.tags.map(t => _.pick(t, ['tag', 'title'])),
       title: page.title,
